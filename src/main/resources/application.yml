@@ -1,0 +1,42 @@
+logging:
+  level:
+    br.com.estado: ${API_LOG_LEVEL:DEBUG}
+    org.springframework:
+      boot.context: INFO
+
+server:
+  compression:
+    enabled: true
+  context-path: /
+  port: ${SERVER_PORT:8000}
+
+documentation:
+  info:
+    title: Api Estado
+    description: Gerenciamento Estados e municípios.
+  version: ~project.version~
+  base-package: br.com.estado.controller
+
+spring:
+  messages:
+    basename: i18n/messages
+    encoding: UTF-8
+  cache:
+    type: redis
+  datasource:
+    continue-on-error: true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:estado}?reconnect=true
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    tomcat:
+      test-on-borrow: true
+      test-on-connect: true
+      validation-query: SELECT 1 FROM DUAL
+      init-s-q-l: SELECT 1 FROM DUAL
+  jpa:
+    hibernate:
+      ddl-auto: none
+
+api:
+  dolar: https://api-dolar
