@@ -40,3 +40,6 @@ spring:
 
 api:
   dolar: https://api-dolar
+
+app:
+  homepage: index.html
