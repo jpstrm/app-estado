@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @author João Paulo Santarém
  */
 @Entity
-public class City implements Serializable {
+public class City extends AbstractModel implements Serializable {
 
   private static final long serialVersionUID = -3725553877156053084L;
 
