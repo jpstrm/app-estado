@@ -26,9 +26,12 @@ spring:
   datasource:
     continue-on-error: true
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:estado}?reconnect=true
-    username: ${DB_USER}
-    password: ${DB_PASSWORD}
+    url: jdbc:mysql://localhost:3306/ticket?createDatabaseIfNotExist=true&reconnect=true
+    username: root
+    password: db1234567
+#    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:estado}?createDatabaseIfNotExist=true&reconnect=true
+#    username: ${DB_USER}
+#    password: ${DB_PASSWORD}
     tomcat:
       test-on-borrow: true
       test-on-connect: true
@@ -36,7 +39,7 @@ spring:
       init-s-q-l: SELECT 1 FROM DUAL
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
 
 api:
   dolar: https://api-dolar

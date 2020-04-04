@@ -1,5 +1,7 @@
 package br.com.estado.converter;
 
+import br.com.estado.model.City;
+import br.com.estado.request.CityRequest;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

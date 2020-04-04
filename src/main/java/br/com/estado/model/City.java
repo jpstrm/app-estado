@@ -15,7 +15,7 @@ public class City extends AbstractModel implements Serializable {
 
   private String name;
 
-  private String population;
+  private Long population;
 
   @ManyToOne(optional = false)
   @JoinColumn(name = "state_id", referencedColumnName = "id", nullable = false)
@@ -32,11 +32,11 @@ public class City extends AbstractModel implements Serializable {
     this.name = name;
   }
 
-  public String getPopulation() {
+  public Long getPopulation() {
     return population;
   }
 
-  public void setPopulation(String population) {
+  public void setPopulation(Long population) {
     this.population = population;
   }
 

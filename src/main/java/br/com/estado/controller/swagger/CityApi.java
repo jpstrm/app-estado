@@ -1,8 +1,10 @@
 package br.com.estado.controller.swagger;
 
+import br.com.estado.request.CityRequest;
 import br.com.estado.response.CityListResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.http.ResponseEntity;
@@ -20,5 +22,33 @@ public interface CityApi {
       @ApiResponse(code = 200, message = "Requested performed successfully.",
           response = CityListResponse.class)})
   ResponseEntity<CityListResponse> findAll();
+
+  @ApiOperation(value = "Create a City",
+      notes = "Operation to create a city.",
+      consumes = "application/json", produces = "application/json")
+  @ApiResponses({
+      @ApiResponse(code = 201, message = "Requested performed successfully.",
+          response = Void.class)})
+  ResponseEntity<Void> save(
+      @ApiParam(name = "Request") CityRequest cityRequest);
+
+  @ApiOperation(value = "List all Cities",
+      notes = "Operation to list all cities.",
+      consumes = "application/json", produces = "application/json")
+  @ApiResponses({
+      @ApiResponse(code = 200, message = "Requested performed successfully.",
+          response = Void.class)})
+  ResponseEntity<Void> update(
+      @ApiParam(name = "City id") Long cityId,
+      @ApiParam(name = "Request") CityRequest cityRequest);
+
+  @ApiOperation(value = "List all Cities by State id",
+      notes = "Operation to list all cities by state id.",
+      consumes = "application/json", produces = "application/json")
+  @ApiResponses({
+      @ApiResponse(code = 200, message = "Requested performed successfully.",
+          response = CityListResponse.class)})
+  ResponseEntity<CityListResponse> findByStateId(
+      @ApiParam(name = "State id", example = "1") Long stateId);
 
 }
