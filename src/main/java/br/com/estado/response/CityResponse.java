@@ -1,4 +1,4 @@
-package br.com.estado.request;
+package br.com.estado.response;
 
 import io.swagger.annotations.ApiModelProperty;
 

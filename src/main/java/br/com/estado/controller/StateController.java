@@ -3,6 +3,7 @@ package br.com.estado.controller;
 import br.com.estado.controller.swagger.StateApi;
 import br.com.estado.converter.StateConverter;
 import br.com.estado.model.State;
+import br.com.estado.request.StateRequest;
 import br.com.estado.response.StateListResponse;
 import br.com.estado.service.StateService;
 import org.slf4j.Logger;
@@ -10,10 +11,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -40,6 +40,26 @@ public class StateController implements StateApi {
     logger.info("Response GET /states - size: {}", response.getTotalElements());
 
     return ResponseEntity.status(HttpStatus.OK).body(response);
+  }
+
+  @Override
+  @PostMapping
+  public ResponseEntity<Void> save(@Valid @RequestBody final StateRequest stateRequest) {
+    logger.info("POST /states - {}", stateRequest);
+    stateService.save(stateRequest);
+    logger.info("POST /states - {}", stateRequest);
+
+    return ResponseEntity.status(HttpStatus.CREATED).build();
+  }
+
+  @Override
+  @PutMapping("/{stateId}")
+  public ResponseEntity<Void> update(@PathVariable final Long stateId, @Valid @RequestBody StateRequest stateRequest) {
+    logger.info("POST /states/{} - {}", stateId, stateRequest);
+    stateService.update(stateId, stateRequest);
+    logger.info("Response POST /states/{} - {}", stateId, stateRequest);
+
+    return ResponseEntity.status(HttpStatus.OK).build();
   }
 
 }

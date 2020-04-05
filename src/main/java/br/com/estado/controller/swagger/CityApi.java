@@ -39,7 +39,7 @@ public interface CityApi {
       @ApiResponse(code = 200, message = "Requested performed successfully.",
           response = Void.class)})
   ResponseEntity<Void> update(
-      @ApiParam(name = "City id") Long cityId,
+      @ApiParam(name = "City id", example = "1") Long cityId,
       @ApiParam(name = "Request") CityRequest cityRequest);
 
   @ApiOperation(value = "List all Cities by State id",

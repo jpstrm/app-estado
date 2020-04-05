@@ -1,5 +1,6 @@
 package br.com.estado.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotBlank;
@@ -12,6 +13,10 @@ import java.io.Serializable;
 public class CityDto implements Serializable {
 
   private static final long serialVersionUID = 3731393270402054227L;
+
+  @ApiModelProperty(value = "City id", example = "1")
+  @JsonInclude(JsonInclude.Include.NON_NULL)
+  public Long id;
 
   @ApiModelProperty(value = "City name", example = "Porto Alegre")
   @NotBlank
@@ -26,6 +31,14 @@ public class CityDto implements Serializable {
   public Long stateId;
 
   public CityDto() {
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
   }
 
   public String getName() {
@@ -55,7 +68,8 @@ public class CityDto implements Serializable {
   @Override
   public String toString() {
     return "{\"CityDto\":{"
-        + "\"name\":\"" + name + "\""
+        + "\"id\":\"" + id + "\""
+        + ", \"name\":\"" + name + "\""
         + ", \"population\":\"" + population + "\""
         + ", \"stateId\":\"" + stateId + "\""
         + "}}";

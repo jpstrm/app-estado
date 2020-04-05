@@ -8,7 +8,6 @@ import br.com.estado.repository.CityRepository;
 import br.com.estado.request.CityRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.xnio.conduits.BufferedStreamSinkConduit;
 
 import java.util.List;
 
@@ -57,7 +56,7 @@ public class CityService {
   }
 
   public List<City> findByStateId(final Long stateId) {
-    if (!cityRepository.existsByStateId(stateId)) {
+    if (cityRepository.existsByStateId(stateId)) {
       return cityRepository.findAllByStateId(stateId);
     }
     throw new NotFoundException("Cities not found by State id: " + stateId);

@@ -59,7 +59,7 @@ public class CityController implements CityApi {
     cityService.update(cityId, cityRequest);
     logger.info("Response POST /cities/{} - {}", cityId, cityRequest);
 
-    return ResponseEntity.status(HttpStatus.CREATED).build();
+    return ResponseEntity.status(HttpStatus.OK).build();
   }
 
   @Override

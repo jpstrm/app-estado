@@ -10,6 +10,7 @@ import br.com.estado.service.StateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,12 +20,18 @@ import java.util.stream.Collectors;
 @Component
 public class CityConverter extends DefaultConverter<City, CityDto> {
 
+  @PostConstruct
+  private void setup() {
+    setClazz(City.class);
+    setDtoClazz(CityDto.class);
+  }
+
   @Autowired
   private StateService stateService;
 
   public City fromRequest(CityRequest cityRequest) {
     final State state = stateService.findById(cityRequest.getStateId());
-    final City city = modelMapper.map(cityRequest, City.class);
+    final City city = toAny(cityRequest, City.class);
     city.setState(state);
 
     return city;
