@@ -1,0 +1,28 @@
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+  <!-- Sidebar - Brand -->
+  <a class="sidebar-brand d-flex align-items-center justify-content-center" routerLink="home">
+    <div class="sidebar-brand-icon rotate-n-15">
+      <i class="fas fa-flag-alt"></i>
+    </div>
+    <div class="sidebar-brand-text mx-3">Estado App</div>
+  </a>
+
+  <!-- Divider -->
+  <hr class="sidebar-divider my-0">
+
+  <!-- Nav Items -->
+  <ng-template ngFor let-item [ngForOf]="items" let-i="index">
+
+    <!-- Nav Item -->
+    <li class="nav-item" [class.active]="true">
+      <a class="nav-link" [routerLink]="item.url" routerLinkActive="active">
+        <i class="fas {{item.icon}}"></i>
+        <span>{{item.title}}</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+  </ng-template>
+
+</ul>
