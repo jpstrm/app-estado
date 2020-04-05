@@ -8,7 +8,7 @@
     <version>2.2.6.RELEASE</version>
   </parent>
   <groupId>br.com</groupId>
-  <artifactId>app-estado</artifactId>
+  <artifactId>state-app</artifactId>
   <version>1.0.0</version>
   <name>App Estado</name>
   <description>Gerenciamento de Estados e Municípios. Autor: João Paulo Santarém</description>

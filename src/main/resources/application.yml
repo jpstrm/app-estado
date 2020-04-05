@@ -15,7 +15,7 @@ documentation:
     title: Api Estado
     description: Gerenciamento Estados e municípios.
   version: ~project.version~
-  base-package: br.com.estado.controller
+  base-package: br.com.state.controller
 
 spring:
   messages:
@@ -29,7 +29,7 @@ spring:
     url: jdbc:mysql://localhost:3306/ticket?createDatabaseIfNotExist=true&reconnect=true
     username: root
     password: db1234567
-#    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:estado}?createDatabaseIfNotExist=true&reconnect=true
+#    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:state}?createDatabaseIfNotExist=true&reconnect=true
 #    username: ${DB_USER}
 #    password: ${DB_PASSWORD}
     tomcat:
