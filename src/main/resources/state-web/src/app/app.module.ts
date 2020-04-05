@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { ContainerModule } from './container/container.module';
 import { PagesModule } from './pages/pages.module';
 import { HomeComponent } from './pages/home/home.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
     BrowserModule,
     AppRoutingModule,
     ContainerModule,
-    PagesModule
+    PagesModule,
+    BrowserAnimationsModule
   ],
   declarations: [
     AppComponent,
