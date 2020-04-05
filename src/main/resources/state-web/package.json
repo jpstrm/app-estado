@@ -1,5 +1,7 @@
 {
-  "name": "estado-web",
+  "name": "state-web-app",
+  "description": "State App single page",
+  "author": "João Paulo Santarém",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",

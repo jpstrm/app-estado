@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "estado-web": {
+    "state-web": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/estado-web",
+            "outputPath": "dist/state-web",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -66,18 +66,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "estado-web:build"
+            "browserTarget": "state-web:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "estado-web:build:production"
+              "browserTarget": "state-web:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "estado-web:build"
+            "browserTarget": "state-web:build"
           }
         },
         "test": {
@@ -114,15 +114,19 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "estado-web:serve"
+            "devServerTarget": "state-web:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "estado-web:serve:production"
+              "devServerTarget": "state-web:serve:production"
             }
           }
         }
       }
-    }},
-  "defaultProject": "estado-web"
+    }
+  },
+  "defaultProject": "state-web",
+  "cli": {
+    "analytics": "4ec70b98-ff05-400d-8a25-9fa1ca56108f"
+  }
 }
