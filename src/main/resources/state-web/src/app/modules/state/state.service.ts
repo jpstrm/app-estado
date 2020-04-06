@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { StateApiService, StateDto, StateListResponse } from '../../api/state';
+import { StateApiService, StateListResponse } from '../../api/state';
+import { SharedService } from '../../shared/shared.service';
 
 @Injectable()
 export class StateService {
 
-  states$ = new BehaviorSubject<StateDto[]>([]);
-
-  constructor(private api: StateApiService) { }
+  constructor(
+    private api: StateApiService,
+    private sharedService: SharedService
+  ) { }
 
   findAll(): void {
     this.api.findAllUsingGET1()
-      .subscribe((data: StateListResponse) => {
-        this.states$.next(data.states);
-      });
+      .subscribe((data: StateListResponse) =>
+        this.sharedService.updateStates(data.states));
   }
 
 }

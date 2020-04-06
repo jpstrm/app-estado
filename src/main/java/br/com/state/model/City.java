@@ -1,5 +1,7 @@
 package br.com.state.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,6 +23,7 @@ public class City extends AbstractModel implements Serializable {
 
   @ManyToOne(optional = false)
   @JoinColumn(name = "state_id", referencedColumnName = "id", nullable = false)
+  @JsonIgnoreProperties("cities")
   private State state;
 
   public City() {

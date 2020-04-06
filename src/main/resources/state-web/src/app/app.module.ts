@@ -11,6 +11,7 @@ import { CustomHttpInterceptor } from './interceptor/custom-http-interceptor.ser
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SnackbarService } from './shared/snackbar.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { SharedService } from './shared/shared.service';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
   ],
   providers: [
     SnackbarService,
+    SharedService,
     { provide: HTTP_INTERCEPTORS, useClass: CustomHttpInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]

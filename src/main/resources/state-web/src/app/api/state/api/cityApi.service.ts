@@ -59,6 +59,48 @@ export class CityApiService {
 
 
     /**
+     * Delete by id
+     * Operation to delete a city by id.
+     * @param cityId cityId
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public deleteByIdUsingDELETE(cityId: number, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public deleteByIdUsingDELETE(cityId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public deleteByIdUsingDELETE(cityId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public deleteByIdUsingDELETE(cityId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (cityId === null || cityId === undefined) {
+            throw new Error('Required parameter cityId was null or undefined when calling deleteByIdUsingDELETE.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*',
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.delete<any>(`${this.basePath}/cities/${encodeURIComponent(String(cityId))}`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * List all Cities
      * Operation to list all cities.
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.

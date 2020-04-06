@@ -73,4 +73,14 @@ public class CityController implements CityApi {
     return ResponseEntity.status(HttpStatus.OK).body(response);
   }
 
+  @Override
+  @DeleteMapping("/{cityId}")
+  public ResponseEntity<Void> deleteById(@PathVariable final Long cityId) {
+    logger.info("DELETE /cities/{}", cityId);
+    cityService.deleteById(cityId);
+    logger.info("Response DELETE /cities/{} - msg: success.", cityId);
+
+    return ResponseEntity.status(HttpStatus.OK).build();
+  }
+
 }

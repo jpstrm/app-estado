@@ -1,9 +1,15 @@
 package br.com.state.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author João Paulo Santarém
@@ -21,7 +27,11 @@ public class State extends AbstractModel implements Serializable {
   private String flagUrl;
 
   @Transient
-  private String population;
+  private Long population;
+
+  @OneToMany(mappedBy = "state", fetch = FetchType.LAZY)
+  @JsonIgnoreProperties("state")
+  public List<City> cities = new ArrayList<>();
 
   public State() {
   }
@@ -50,12 +60,20 @@ public class State extends AbstractModel implements Serializable {
     this.flagUrl = flagUrl;
   }
 
-  public String getPopulation() {
+  public Long getPopulation() {
     return population;
   }
 
-  public void setPopulation(String population) {
+  public void setPopulation(Long population) {
     this.population = population;
+  }
+
+  public List<City> getCities() {
+    return cities;
+  }
+
+  public void setCities(List<City> cities) {
+    this.cities = cities;
   }
 
   @Override

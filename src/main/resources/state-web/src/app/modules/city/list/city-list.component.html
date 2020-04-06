@@ -3,6 +3,6 @@
   <!-- Page Heading -->
   <h1 class="h3 mb-4 text-gray-800">Cidades</h1>
 
-  <app-city-table [cities$]="cities$"></app-city-table>
+  <app-city-table [cities$]="cities$" (deleteAction)="deleteCity($event)"></app-city-table>
 
 </div>

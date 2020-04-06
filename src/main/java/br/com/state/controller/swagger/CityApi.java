@@ -51,4 +51,13 @@ public interface CityApi {
   ResponseEntity<CityListResponse> findByStateId(
       @ApiParam(name = "State id", example = "1") Long stateId);
 
+  @ApiOperation(value = "Delete by id",
+      notes = "Operation to delete a city by id.",
+      consumes = "application/json", produces = "application/json")
+  @ApiResponses({
+      @ApiResponse(code = 200, message = "Requested performed successfully.",
+          response = Void.class)})
+  ResponseEntity<Void> deleteById(
+      @ApiParam(name = "City id", example = "1") Long cityId);
+
 }

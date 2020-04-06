@@ -17,7 +17,7 @@ export class CustomHttpInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
         const apiError: ApiError = error.error as ApiError;
-        let msg = error.message;
+        let msg = 'Erro de comunicação com a Api';
         if (apiError && apiError.detail) {
           msg = apiError.detail;
         }

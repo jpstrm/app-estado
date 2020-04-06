@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static br.com.state.helper.ApiHelper.RIO_GRANDE_DO_SUL_CODE;
+
 /**
  * @author João Paulo Santarém
  */
@@ -55,6 +57,14 @@ public class CityService {
       return cityRepository.findAllByStateId(stateId);
     }
     throw new NotFoundException("Cidades não encontradas para o Estado: " + stateId);
+  }
+
+  public void deleteById(final Long cityId) {
+    final City city = findById(cityId);
+    if (city.getState().getCode().equalsIgnoreCase(RIO_GRANDE_DO_SUL_CODE)) {
+      throw new BusinessException("Não é possível deletar cidades do estado do Rio Grande do Sul");
+    }
+    cityRepository.deleteById(cityId);
   }
 
 

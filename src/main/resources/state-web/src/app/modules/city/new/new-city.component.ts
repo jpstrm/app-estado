@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CityService } from '../city.service';
 import { FormHelper } from '../../../helper/form.helper';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { StateDto } from '../../../api/state';
-import { StateService } from '../../state/state.service';
 import { skip } from 'rxjs/operators';
 
 @Component({
@@ -20,13 +19,14 @@ export class NewCityComponent implements OnInit {
 
   constructor(
     private cityService: CityService,
-    private stateService: StateService,
-    public dialogRef: MatDialogRef<NewCityComponent>
-  ) { }
+    public dialogRef: MatDialogRef<NewCityComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Observable<StateDto[]>
+  ) {
+    this.states$ = this.data;
+  }
 
   ngOnInit(): void {
     this.buildForm();
-    this.loadStates();
   }
 
   private buildForm(): void {
@@ -57,11 +57,6 @@ export class NewCityComponent implements OnInit {
 
   closeDialog(): void {
     this.dialogRef.close();
-  }
-
-  private loadStates() {
-    this.states$ = this.stateService.states$.asObservable();
-    this.stateService.findAll();
   }
 
 }

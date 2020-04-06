@@ -2,7 +2,7 @@
   <div class="flex-column align-content-center">
     <!-- Title -->
     <div>
-      <h3>Selectione um Estado</h3>
+      <h3>Lista de Estados</h3>
     </div>
 
     <!-- State select -->
@@ -17,7 +17,7 @@
 
   <!-- State photo -->
   <div class="state-url justify-content-end">
-    <mat-card>
+    <mat-card [hidden]="!selectedState.id" class="pb-0">
       <img mat-card-image [src]="selectedState.flagUrl" alt="Bandeira do Estado">
     </mat-card>
   </div>

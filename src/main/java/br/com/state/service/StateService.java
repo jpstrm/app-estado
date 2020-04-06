@@ -3,6 +3,7 @@ package br.com.state.service;
 import br.com.state.converter.StateConverter;
 import br.com.state.exception.BusinessException;
 import br.com.state.exception.NotFoundException;
+import br.com.state.model.City;
 import br.com.state.model.State;
 import br.com.state.repository.StateRepository;
 import br.com.state.request.StateRequest;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author João Paulo Santarém
@@ -25,7 +27,12 @@ public class StateService {
 
   public List<State> findAll() {
 
-    return stateRepository.findAll();
+    return stateRepository.findAll().stream()
+        .map(s -> {
+          s.setPopulation(getPopulation(s));
+          return s;
+        })
+        .collect(Collectors.toList());
   }
 
   public State findById(final Long id) {
@@ -51,6 +58,14 @@ public class StateService {
     state.setCode(stateRequest.getCode());
 
     stateRepository.save(state);
+  }
+
+  private Long getPopulation(final State state) {
+
+    return state.getCities().stream()
+        .map(City::getPopulation)
+        .reduce(0L, Long::sum);
+
   }
 
 }
