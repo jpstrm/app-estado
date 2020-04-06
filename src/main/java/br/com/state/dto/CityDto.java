@@ -26,6 +26,10 @@ public class CityDto implements Serializable {
   @NotNull
   public Long population;
 
+  @ApiModelProperty(value = "State code", example = "RS")
+  @NotNull
+  public String stateCode;
+
   @ApiModelProperty(value = "State id", example = "1")
   @NotNull
   public Long stateId;
@@ -57,6 +61,14 @@ public class CityDto implements Serializable {
     this.population = population;
   }
 
+  public String getStateCode() {
+    return stateCode;
+  }
+
+  public void setStateCode(String stateCode) {
+    this.stateCode = stateCode;
+  }
+
   public Long getStateId() {
     return stateId;
   }
@@ -71,6 +83,7 @@ public class CityDto implements Serializable {
         + "\"id\":\"" + id + "\""
         + ", \"name\":\"" + name + "\""
         + ", \"population\":\"" + population + "\""
+        + ", \"stateCode\":\"" + stateCode + "\""
         + ", \"stateId\":\"" + stateId + "\""
         + "}}";
   }

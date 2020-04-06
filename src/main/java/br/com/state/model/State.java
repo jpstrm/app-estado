@@ -18,6 +18,8 @@ public class State extends AbstractModel implements Serializable {
 
   private String code;
 
+  private String flagUrl;
+
   @Transient
   private String population;
 
@@ -40,6 +42,14 @@ public class State extends AbstractModel implements Serializable {
     this.code = code;
   }
 
+  public String getFlagUrl() {
+    return flagUrl;
+  }
+
+  public void setFlagUrl(String flagUrl) {
+    this.flagUrl = flagUrl;
+  }
+
   public String getPopulation() {
     return population;
   }
@@ -54,6 +64,7 @@ public class State extends AbstractModel implements Serializable {
         + super.toString()
         + ", \"name\":\"" + name + "\""
         + ", \"code\":\"" + code + "\""
+        + ", \"flagUrl\":\"" + flagUrl + "\""
         + ", \"population\":\"" + population + "\""
         + "}";
   }

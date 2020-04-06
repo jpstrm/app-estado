@@ -34,12 +34,12 @@ public class StateService {
   }
 
   private NotFoundException notFoundException() {
-    throw new NotFoundException("State not found.");
+    throw new NotFoundException("Estado não encontrado.");
   }
 
   public void save(final StateRequest stateRequest) {
     if (stateRepository.existsByName(stateRequest.getName())) {
-      throw new BusinessException("There is already a State with this name.");
+      throw new BusinessException("Já existe um Estado com esse nome.");
     }
     State state = stateConverter.fromRequest(stateRequest);
     stateRepository.save(state);

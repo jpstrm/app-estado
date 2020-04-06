@@ -26,6 +26,10 @@ public class StateDto implements Serializable {
   @NotBlank
   public String code;
 
+  @ApiModelProperty(value = "Flag url", example = "http://localhost/img.jpg")
+  @NotBlank
+  public String flagUrl;
+
   @ApiModelProperty(value = "Population", example = "3000000")
   @NotNull
   public Long population;
@@ -57,6 +61,14 @@ public class StateDto implements Serializable {
     this.code = code;
   }
 
+  public String getFlagUrl() {
+    return flagUrl;
+  }
+
+  public void setFlagUrl(String flagUrl) {
+    this.flagUrl = flagUrl;
+  }
+
   public Long getPopulation() {
     return population;
   }
@@ -71,6 +83,7 @@ public class StateDto implements Serializable {
         + "\"id\":\"" + id + "\""
         + ", \"name\":\"" + name + "\""
         + ", \"code\":\"" + code + "\""
+        + ", \"flagUrl\":\"" + flagUrl + "\""
         + ", \"population\":\"" + population + "\""
         + "}}";
   }
