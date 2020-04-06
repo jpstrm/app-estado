@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * @author João Paulo Santarém
@@ -33,6 +34,9 @@ public class StateDto implements Serializable {
   @ApiModelProperty(value = "Population", example = "3000000")
   @NotNull
   public Long population;
+
+  @ApiModelProperty(value = "Population cost", example = "5.000000")
+  public BigDecimal populationCost;
 
   public StateDto() {
   }
@@ -77,6 +81,14 @@ public class StateDto implements Serializable {
     this.population = population;
   }
 
+  public BigDecimal getPopulationCost() {
+    return populationCost;
+  }
+
+  public void setPopulationCost(BigDecimal populationCost) {
+    this.populationCost = populationCost;
+  }
+
   @Override
   public String toString() {
     return "{\"StateDto\":{"
@@ -85,6 +97,7 @@ public class StateDto implements Serializable {
         + ", \"code\":\"" + code + "\""
         + ", \"flagUrl\":\"" + flagUrl + "\""
         + ", \"population\":\"" + population + "\""
+        + ", \"populationCost\":\"" + populationCost + "\""
         + "}}";
   }
 

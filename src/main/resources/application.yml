@@ -42,7 +42,11 @@ spring:
       ddl-auto: none
 
 api:
-  dolar: https://api-dolar
+  dollar-currency: https://free.currconv.com/api/v7/convert
 
 app:
   homepage: index.html
+  cost:
+    cost-per-citizen-in-dollar: 123.45
+    discount-above: 50000
+    discount-value: 12.3

@@ -1,6 +1,8 @@
 package br.com.state.service;
 
+import br.com.state.client.CurrencyConvertClient;
 import br.com.state.converter.StateConverter;
+import br.com.state.dto.DolarCurrencyDto;
 import br.com.state.exception.BusinessException;
 import br.com.state.exception.NotFoundException;
 import br.com.state.model.City;
@@ -8,10 +10,15 @@ import br.com.state.model.State;
 import br.com.state.repository.StateRepository;
 import br.com.state.request.StateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static java.util.Objects.nonNull;
 
 /**
  * @author João Paulo Santarém
@@ -25,12 +32,23 @@ public class StateService {
   @Autowired
   private StateConverter stateConverter;
 
-  public List<State> findAll() {
+  @Autowired
+  private CurrencyConvertClient currencyConvertClient;
 
+  @Value("${app.cost.cost-per-citizen-in-dollar}")
+  private BigDecimal costPerCitizenInDollar;
+
+  @Value("${app.cost.discount-above}")
+  private Long discountAbovePopulationNum;
+
+  @Value("${app.cost.discount-value}")
+  private BigDecimal discountValue;
+
+  public List<State> findAll() {
     return stateRepository.findAll().stream()
-        .map(s -> {
+        .peek(s -> {
           s.setPopulation(getPopulation(s));
-          return s;
+          s.setPopulationCost(getPopulationCost(s));
         })
         .collect(Collectors.toList());
   }
@@ -66,6 +84,38 @@ public class StateService {
         .map(City::getPopulation)
         .reduce(0L, Long::sum);
 
+  }
+
+  private BigDecimal getPopulationCost(final State s) {
+    final BigDecimal unitCostInBrl = this.getCostInBrl();
+
+    final BigDecimal totalCost = unitCostInBrl
+        .multiply(costPerCitizenInDollar)
+        .multiply(BigDecimal.valueOf(s.getPopulation()));
+
+    BigDecimal totalDiscount = getTotalDiscount(s, totalCost);
+
+    return totalCost.subtract(totalDiscount)
+        .setScale(2, RoundingMode.HALF_UP);
+  }
+
+  private BigDecimal getCostInBrl() {
+    BigDecimal brlValue = BigDecimal.ONE;
+    final DolarCurrencyDto dolarCurrencyDto = currencyConvertClient.getDolarCurrency();
+    if (nonNull(dolarCurrencyDto) && nonNull(dolarCurrencyDto.getBrlValue())) {
+      brlValue = dolarCurrencyDto.getBrlValue();
+    }
+
+    return brlValue;
+  }
+
+  private BigDecimal getTotalDiscount(final State s, final BigDecimal totalCost) {
+    if (s.getPopulation() > discountAbovePopulationNum) {
+      return totalCost.multiply(discountValue)
+          .divide(BigDecimal.valueOf(100), RoundingMode.HALF_UP);
+    }
+
+    return BigDecimal.ZERO;
   }
 
 }

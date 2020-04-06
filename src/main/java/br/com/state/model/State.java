@@ -8,6 +8,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +29,9 @@ public class State extends AbstractModel implements Serializable {
 
   @Transient
   private Long population;
+
+  @Transient
+  private BigDecimal populationCost;
 
   @OneToMany(mappedBy = "state", fetch = FetchType.LAZY)
   @JsonIgnoreProperties("state")
@@ -68,6 +72,14 @@ public class State extends AbstractModel implements Serializable {
     this.population = population;
   }
 
+  public BigDecimal getPopulationCost() {
+    return populationCost;
+  }
+
+  public void setPopulationCost(BigDecimal populationCost) {
+    this.populationCost = populationCost;
+  }
+
   public List<City> getCities() {
     return cities;
   }
@@ -84,6 +96,7 @@ public class State extends AbstractModel implements Serializable {
         + ", \"code\":\"" + code + "\""
         + ", \"flagUrl\":\"" + flagUrl + "\""
         + ", \"population\":\"" + population + "\""
+        + ", \"populationCost\":\"" + populationCost + "\""
         + "}";
   }
 

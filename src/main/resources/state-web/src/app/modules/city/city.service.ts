@@ -26,8 +26,9 @@ export class CityService {
   create(value: CityDto): void {
     this.api.saveUsingPOST(value)
       .subscribe(() => {
-          this.sharedService.fetchCitiesAndStates();
+          this.snackbarService.open('Cidade criada com sucesso!');
           this.hasError$.next(false);
+          this.sharedService.fetchCitiesAndStates();
         },
         () => this.hasError$.next(true));
   }
