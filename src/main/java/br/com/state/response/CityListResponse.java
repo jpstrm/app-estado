@@ -15,10 +15,10 @@ public class CityListResponse implements Serializable {
   private static final long serialVersionUID = 5575771220012336060L;
 
   @ApiModelProperty("Total of cities")
-  public Integer totalElements = 0;
+  private Integer totalElements = 0;
 
   @ApiModelProperty(value = "City list")
-  public List<CityDto> cities = new ArrayList<>();
+  private List<CityDto> cities = new ArrayList<>();
 
   public CityListResponse() {
   }

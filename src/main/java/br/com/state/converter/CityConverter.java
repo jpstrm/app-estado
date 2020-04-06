@@ -3,6 +3,7 @@ package br.com.state.converter;
 import br.com.state.dto.CityDto;
 import br.com.state.model.City;
 import br.com.state.model.State;
+import br.com.state.request.CityListRequest;
 import br.com.state.request.CityRequest;
 import br.com.state.response.CityListResponse;
 import br.com.state.response.CityListResponse.CityListResponseBuilder;
@@ -35,6 +36,12 @@ public class CityConverter extends DefaultConverter<City, CityDto> {
     city.setState(state);
 
     return city;
+  }
+
+  public List<City> fromListRequest(CityListRequest cityListRequest) {
+    return cityListRequest.getCities().stream()
+        .map(this::fromRequest)
+        .collect(Collectors.toList());
   }
 
   public CityListResponse toListResponse(final List<City> cities) {

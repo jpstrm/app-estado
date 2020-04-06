@@ -5,6 +5,7 @@ import br.com.state.exception.BusinessException;
 import br.com.state.exception.NotFoundException;
 import br.com.state.model.City;
 import br.com.state.repository.CityRepository;
+import br.com.state.request.CityListRequest;
 import br.com.state.request.CityRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,11 +33,15 @@ public class CityService {
 
 
   public void save(final CityRequest cityRequest) {
-    if (cityRepository.existsByNameAndStateId(cityRequest.getName(), cityRequest.getStateId())) {
-      throw new BusinessException("Já existe uma Cidade para o Estado selecionado.");
-    }
     City city = cityConverter.fromRequest(cityRequest);
+    validateDuplicated(city.getName(), city.getState().getId(), city.getState().getName());
     cityRepository.save(city);
+  }
+
+  public void saveAll(CityListRequest cityListRequest) {
+    final List<City> cities = cityConverter.fromListRequest(cityListRequest);
+    cities.forEach(c -> validateDuplicated(c.getName(), c.getState().getId(), c.getState().getName()));
+    cityRepository.saveAll(cities);
   }
 
   public void update(final Long id, final CityRequest cityRequest) {
@@ -70,6 +75,12 @@ public class CityService {
 
   private NotFoundException notFoundException() {
     throw new NotFoundException("Cidade não encontrada.");
+  }
+
+  private void validateDuplicated(final String cityName, final Long stateId, final String stateName) {
+    if (cityRepository.existsByNameAndStateId(cityName, stateId)) {
+      throw new BusinessException("Cidade '" + cityName + "' já existe no Estado '" + stateName + "'.");
+    }
   }
 
 }

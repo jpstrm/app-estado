@@ -17,26 +17,26 @@ public class StateDto implements Serializable {
 
   @ApiModelProperty(value = "State id", example = "1")
   @JsonInclude(JsonInclude.Include.NON_NULL)
-  public Long id;
+  private Long id;
 
   @ApiModelProperty(value = "State name", example = "Rio Grande do Sul")
   @NotBlank
-  public String name;
+  private String name;
 
   @ApiModelProperty(value = "State code", example = "RS")
   @NotBlank
-  public String code;
+  private String code;
 
   @ApiModelProperty(value = "Flag url", example = "http://localhost/img.jpg")
   @NotBlank
-  public String flagUrl;
+  private String flagUrl;
 
   @ApiModelProperty(value = "Population", example = "3000000")
   @NotNull
-  public Long population;
+  private Long population;
 
   @ApiModelProperty(value = "Population cost", example = "5.000000")
-  public BigDecimal populationCost;
+  private BigDecimal populationCost;
 
   public StateDto() {
   }

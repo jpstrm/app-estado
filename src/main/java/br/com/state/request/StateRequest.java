@@ -1,5 +1,6 @@
 package br.com.state.request;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotBlank;
@@ -8,17 +9,18 @@ import java.io.Serializable;
 /**
  * @author João Paulo Santarém
  */
+@ApiModel(description = "State Request")
 public class StateRequest implements Serializable {
 
-  public static final long serialVersionUID = 3406477418407553166L;
+  public static final long serialVersionUID = -6525444678325413136L;
 
   @ApiModelProperty(value = "State name", example = "Rio Grande do Sul")
   @NotBlank
-  public String name;
+  private String name;
 
   @ApiModelProperty(value = "State code", example = "RS")
   @NotBlank
-  public String code;
+  private String code;
 
   public StateRequest() {
   }

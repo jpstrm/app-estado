@@ -21,7 +21,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static br.com.state.helper.ApiHelper.API_ERROR_MSG;
 import static com.google.common.collect.Lists.newArrayList;
 
 @Configuration
@@ -74,7 +73,7 @@ public class SwaggerConfig {
     return new ResponseMessageBuilder()
         .code(code)
         .message(message)
-        .responseModel(new ModelRef(API_ERROR_MSG))
+        .responseModel(new ModelRef("ApiError"))
         .build();
   }
 

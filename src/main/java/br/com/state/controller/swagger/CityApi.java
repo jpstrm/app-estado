@@ -1,5 +1,6 @@
 package br.com.state.controller.swagger;
 
+import br.com.state.request.CityListRequest;
 import br.com.state.request.CityRequest;
 import br.com.state.response.CityListResponse;
 import io.swagger.annotations.Api;
@@ -31,6 +32,15 @@ public interface CityApi {
           response = Void.class)})
   ResponseEntity<Void> save(
       @ApiParam(name = "Request") CityRequest cityRequest);
+
+  @ApiOperation(value = "Create list of Cities",
+      notes = "Operation to create a list of cities.",
+      consumes = "application/json", produces = "application/json")
+  @ApiResponses({
+      @ApiResponse(code = 201, message = "Requested performed successfully.",
+          response = Void.class)})
+  ResponseEntity<Void> saveAll(
+      @ApiParam(name = "Request") CityListRequest cityListRequest);
 
   @ApiOperation(value = "List all Cities",
       notes = "Operation to list all cities.",

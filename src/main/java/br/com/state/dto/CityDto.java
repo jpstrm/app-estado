@@ -16,23 +16,23 @@ public class CityDto implements Serializable {
 
   @ApiModelProperty(value = "City id", example = "1")
   @JsonInclude(JsonInclude.Include.NON_NULL)
-  public Long id;
+  private Long id;
 
   @ApiModelProperty(value = "City name", example = "Porto Alegre")
   @NotBlank
-  public String name;
+  private String name;
 
   @ApiModelProperty(value = "Population", example = "100000")
   @NotNull
-  public Long population;
+  private Long population;
 
   @ApiModelProperty(value = "State code", example = "RS")
   @NotNull
-  public String stateCode;
+  private String stateCode;
 
   @ApiModelProperty(value = "State id", example = "1")
   @NotNull
-  public Long stateId;
+  private Long stateId;
 
   public CityDto() {
   }

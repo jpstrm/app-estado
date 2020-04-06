@@ -15,10 +15,10 @@ public class StateListResponse implements Serializable {
   private static final long serialVersionUID = 8232367278499559221L;
 
   @ApiModelProperty("Total of states")
-  public Integer totalElements = 0;
+  private Integer totalElements = 0;
 
   @ApiModelProperty(value = "State list")
-  public List<StateDto> states = new ArrayList<>();
+  private List<StateDto> states = new ArrayList<>();
 
   public StateListResponse() {
   }

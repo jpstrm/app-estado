@@ -10,7 +10,7 @@ import java.util.Date;
 
 import static br.com.state.helper.ApiHelper.API_ERROR_MSG;
 
-@ApiModel(API_ERROR_MSG)
+@ApiModel(value = "ApiError", description = API_ERROR_MSG)
 public class ApiError implements Serializable {
 
   private static final long serialVersionUID = 8499150273690549026L;

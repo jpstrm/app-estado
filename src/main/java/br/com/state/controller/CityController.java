@@ -3,6 +3,7 @@ package br.com.state.controller;
 import br.com.state.controller.swagger.CityApi;
 import br.com.state.converter.CityConverter;
 import br.com.state.model.City;
+import br.com.state.request.CityListRequest;
 import br.com.state.request.CityRequest;
 import br.com.state.response.CityListResponse;
 import br.com.state.service.CityService;
@@ -48,6 +49,16 @@ public class CityController implements CityApi {
     logger.info("POST /cities - {}", cityRequest);
     cityService.save(cityRequest);
     logger.info("POST /cities - {}", cityRequest);
+
+    return ResponseEntity.status(HttpStatus.CREATED).build();
+  }
+
+  @Override
+  @PostMapping("/multi")
+  public ResponseEntity<Void> saveAll(@Valid @RequestBody final CityListRequest cityListRequest) {
+    logger.info("POST /cities/multi - size: {}", cityListRequest.getCities().size());
+    cityService.saveAll(cityListRequest);
+    logger.info("POST /cities/multi - size: {}", cityListRequest.getCities().size());
 
     return ResponseEntity.status(HttpStatus.CREATED).build();
   }

@@ -1,5 +1,6 @@
 package br.com.state.request;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotBlank;
@@ -9,21 +10,22 @@ import java.io.Serializable;
 /**
  * @author João Paulo Santarém
  */
+@ApiModel(description = "City Request")
 public class CityRequest implements Serializable {
 
   public static final long serialVersionUID = 3406477418407553166L;
 
   @ApiModelProperty(value = "City name", example = "Porto Alegre")
   @NotBlank
-  public String name;
+  private String name;
 
   @ApiModelProperty(value = "Population", example = "100000")
   @NotNull
-  public Long population;
+  private Long population;
 
   @ApiModelProperty(value = "State id", example = "1")
   @NotNull
-  public Long stateId;
+  private Long stateId;
 
   public CityRequest() {
   }
