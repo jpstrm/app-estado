@@ -30,7 +30,7 @@ public class CityService {
 
 
   public void save(final CityRequest cityRequest) {
-    if (cityRepository.existsByName(cityRequest.getName())) {
+    if (cityRepository.existsByNameAndStateId(cityRequest.getName(), cityRequest.getStateId())) {
       throw new BusinessException("Já existe uma Cidade para o Estado selecionado.");
     }
     City city = cityConverter.fromRequest(cityRequest);
@@ -50,11 +50,6 @@ public class CityService {
         .orElseThrow(this::notFoundException);
   }
 
-  public City findByName(final String name) {
-    return cityRepository.findByName(name)
-        .orElseThrow(this::notFoundException);
-  }
-
   public List<City> findByStateId(final Long stateId) {
     if (cityRepository.existsByStateId(stateId)) {
       return cityRepository.findAllByStateId(stateId);
@@ -66,6 +61,5 @@ public class CityService {
   private NotFoundException notFoundException() {
     throw new NotFoundException("Cidade não encontrada.");
   }
-
 
 }
