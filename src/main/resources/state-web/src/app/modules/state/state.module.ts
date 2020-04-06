@@ -6,20 +6,29 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { StateApiModule } from '../../api/state';
 import { StateService } from './state.service';
+import { StateFlagComponent } from './flag/state-flag.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatSelectModule } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
     MatTableModule,
     MatPaginatorModule,
-    StateApiModule
+    StateApiModule,
+    MatCardModule,
+    MatSelectModule,
+    FormsModule
   ],
   declarations: [
     StateTableComponent,
-    StateListComponent
+    StateListComponent,
+    StateFlagComponent
   ],
   exports: [
-    StateListComponent
+    StateListComponent,
+    StateFlagComponent
   ],
   providers: [
     StateService

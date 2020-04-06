@@ -25,6 +25,10 @@ export interface CityDto {
      */
     population?: number;
     /**
+     * State code
+     */
+    stateCode?: string;
+    /**
      * State id
      */
     stateId?: number;

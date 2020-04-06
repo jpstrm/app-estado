@@ -17,6 +17,10 @@ export interface StateDto {
      */
     code?: string;
     /**
+     * Flag url
+     */
+    flagUrl?: string;
+    /**
      * State id
      */
     id?: number;
