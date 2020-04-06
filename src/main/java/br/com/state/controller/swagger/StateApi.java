@@ -8,6 +8,8 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 /**
  * @author João Paulo Santarém
@@ -30,7 +32,7 @@ public interface StateApi {
       @ApiResponse(code = 201, message = "Requested performed successfully.",
           response = Void.class)})
   ResponseEntity<Void> save(
-      @ApiParam(name = "Request") StateRequest stateRequest);
+      @ApiParam @RequestBody StateRequest stateRequest);
 
   @ApiOperation(value = "List all States",
       notes = "Operation to list all states.",
@@ -39,7 +41,7 @@ public interface StateApi {
       @ApiResponse(code = 200, message = "Requested performed successfully.",
           response = Void.class)})
   ResponseEntity<Void> update(
-      @ApiParam(name = "State id", example = "1") Long stateId,
-      @ApiParam(name = "Request") StateRequest stateRequest);
+      @ApiParam(example = "1", required = true) @PathVariable Long stateId,
+      @ApiParam(required = true) @RequestBody StateRequest stateRequest);
 
 }
