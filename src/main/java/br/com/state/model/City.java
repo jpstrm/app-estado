@@ -3,11 +3,13 @@ package br.com.state.model;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.io.Serializable;
 
 /**
  * @author João Paulo Santarém
  */
+@Table(name = "CIDADE")
 @Entity
 public class City extends AbstractModel implements Serializable {
 

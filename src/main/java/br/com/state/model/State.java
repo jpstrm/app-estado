@@ -1,12 +1,14 @@
 package br.com.state.model;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 import java.io.Serializable;
 
 /**
  * @author João Paulo Santarém
  */
+@Table(name = "ESTADO")
 @Entity
 public class State extends AbstractModel implements Serializable {
 

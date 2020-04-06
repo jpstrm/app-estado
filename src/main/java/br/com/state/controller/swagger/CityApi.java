@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 /**
  * @author João Paulo Santarém
  */
-@Api(value = "Cities", tags = "Information about cities")
+@Api(value = "Cities", tags = "CityApi")
 public interface CityApi {
 
   @ApiOperation(value = "List all Cities",
