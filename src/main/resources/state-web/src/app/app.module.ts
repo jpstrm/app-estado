@@ -3,22 +3,20 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ContainerModule } from './container/container.module';
-import { PagesModule } from './pages/pages.module';
-import { HomeComponent } from './pages/home/home.component';
+import { ContainerModule } from './modules/container/container.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HomeModule } from './modules/home/home.module';
 
 @NgModule({
   imports: [
     BrowserModule,
     AppRoutingModule,
     ContainerModule,
-    PagesModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HomeModule
   ],
   declarations: [
-    AppComponent,
-    HomeComponent
+    AppComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

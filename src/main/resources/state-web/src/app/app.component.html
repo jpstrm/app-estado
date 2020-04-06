@@ -1,7 +1,12 @@
 <!-- Wrapper -->
-<div class="wrapper">
+<div id="wrapper">
 
-  <!-- Home page -->
-  <app-home></app-home>
+  <!-- Navbar -->
+  <app-sidebar [items]="items"></app-sidebar>
+
+  <!-- Home -->
+  <div class="w-100">
+    <app-home></app-home>
+  </div>
 
 </div>

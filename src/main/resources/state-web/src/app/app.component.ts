@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SidebarItem } from './modules/container/sidebar/sidebar-item';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'state-web';
+
+  title = 'App Estado';
+
+  items: SidebarItem[]  = [
+    { title: 'Cadastrar Cidade', url: '/#cities', icon: 'fa-city' }
+  ];
+
 }

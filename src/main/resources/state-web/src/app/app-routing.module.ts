@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { StatesComponent } from './pages/states/states.component';
-import { CitiesComponent } from './pages/cities/cities.component';
-import { HomeComponent } from './pages/home/home.component';
+import { StateListComponent } from './modules/state/list/state-list.component';
+import { HomeComponent } from './modules/home/home.component';
+import { CityListComponent } from './modules/city/list/city-list.component';
 
 const routes: Routes = [
   {
@@ -12,16 +12,17 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    component: HomeComponent
+    component: HomeComponent,
+    pathMatch: 'full'
   },
   {
     path: 'estados',
-    component: StatesComponent,
+    component: StateListComponent,
     pathMatch: 'full'
   },
   {
     path: 'cidades',
-    component: CitiesComponent,
+    component: CityListComponent,
     pathMatch: 'full'
   }
 ];
