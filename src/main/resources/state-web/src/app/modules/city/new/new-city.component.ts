@@ -6,6 +6,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { StateDto } from '../../../api/state';
 import { StateService } from '../../state/state.service';
+import { skip } from 'rxjs/operators';
 
 @Component({
   selector: 'app-new-city',
@@ -39,10 +40,19 @@ export class NewCityComponent implements OnInit {
   save(): void {
     if (this.form.valid) {
       this.cityService.create(this.form.value);
-      this.dialogRef.close();
+      this.watchError();
     } else {
       FormHelper.markFormAsTouched(this.form);
     }
+  }
+
+  watchError(): void {
+    this.cityService.hasError$.pipe(skip(1))
+      .subscribe(hasError => {
+        if (!hasError) {
+          this.dialogRef.close();
+        }
+      });
   }
 
   closeDialog(): void {

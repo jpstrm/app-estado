@@ -7,6 +7,7 @@ export class CityService {
 
   cities$ = new BehaviorSubject<CityDto[]>([]);
   dialog$ = new BehaviorSubject<void>(null);
+  hasError$ = new BehaviorSubject<boolean>(false);
 
   constructor(private api: CityApiService) {
   }
@@ -20,7 +21,11 @@ export class CityService {
 
   create(value: CityDto): void {
     this.api.saveUsingPOST(value)
-      .subscribe(() => this.findAll());
+      .subscribe(() => {
+          this.findAll();
+          this.hasError$.next(false);
+        },
+        () => this.hasError$.next(true));
   }
 
 }

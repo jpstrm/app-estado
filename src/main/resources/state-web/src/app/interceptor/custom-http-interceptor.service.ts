@@ -1,12 +1,14 @@
 import { SnackbarService } from '../shared/snackbar.service';
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { ApiError } from '../api/state';
 
 @Injectable()
 export class CustomHttpInterceptor implements HttpInterceptor {
+
+  hasError$ = new BehaviorSubject<boolean>(false);
 
   constructor(public snackbarService: SnackbarService) { }
 

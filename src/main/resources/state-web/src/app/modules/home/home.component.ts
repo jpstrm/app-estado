@@ -22,7 +22,10 @@ export class HomeComponent implements OnInit {
 
   watchDialog(): void {
     this.cityService.dialog$.pipe(skip(1))
-      .subscribe(() => this.dialog.open(NewCityComponent, { width: '350px' }));
+      .subscribe(() => this.dialog.open(NewCityComponent, {
+        width: '350px',
+        disableClose: true
+      }));
   }
 
 }
