@@ -32,4 +32,8 @@ export interface StateDto {
      * Population
      */
     population?: number;
+    /**
+     * Population cost
+     */
+    populationCost?: number;
 }

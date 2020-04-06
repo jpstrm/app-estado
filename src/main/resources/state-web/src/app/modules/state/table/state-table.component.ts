@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class StateTableComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'code', 'population'];
+  displayedColumns: string[] = ['name', 'code', 'population', 'populationCost'];
 
   @Input() states: Observable<StateDto[]>;
 

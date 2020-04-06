@@ -16,7 +16,8 @@ export class AppComponent {
     private cityService: CityService
   ) {
     this.items = [
-      { title: 'Cadastrar Cidade', icon: 'fa-city', action$: cityService.dialog$ }
+      { title: 'Cadastrar Cidade', icon: 'fa-city', action$: cityService.dialog$ },
+      { title: 'Cadastrar Cidades em Lote', icon: 'fa-city', action$: cityService.dialogInLote$ },
     ];
   }
 

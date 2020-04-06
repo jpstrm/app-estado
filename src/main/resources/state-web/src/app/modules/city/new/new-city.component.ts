@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CityService } from '../city.service';
 import { FormHelper } from '../../../helper/form.helper';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -19,6 +19,7 @@ export class NewCityComponent implements OnInit {
 
   constructor(
     private cityService: CityService,
+    private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<NewCityComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Observable<StateDto[]>
   ) {
@@ -30,10 +31,10 @@ export class NewCityComponent implements OnInit {
   }
 
   private buildForm(): void {
-    this.form = new FormGroup({
-      name: new FormControl('', Validators.required),
-      population: new FormControl('', Validators.required),
-      stateId: new FormControl('', Validators.required)
+    this.form = this.formBuilder.group({
+      name: ['', Validators.required],
+      population: ['', Validators.required],
+      stateId: ['', Validators.required]
     });
   }
 

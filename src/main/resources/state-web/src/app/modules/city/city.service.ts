@@ -8,6 +8,7 @@ import { SnackbarService } from '../../shared/snackbar.service';
 export class CityService {
 
   dialog$ = new BehaviorSubject<void>(null);
+  dialogInLote$ = new BehaviorSubject<void>(null);
   hasError$ = new BehaviorSubject<boolean>(false);
 
   constructor(
@@ -26,19 +27,29 @@ export class CityService {
   create(value: CityDto): void {
     this.api.saveUsingPOST(value)
       .subscribe(() => {
-          this.snackbarService.open('Cidade criada com sucesso!');
-          this.hasError$.next(false);
-          this.sharedService.fetchCitiesAndStates();
-        },
-        () => this.hasError$.next(true));
+        this.loadSuccess('Cidade criada com sucesso!');
+      }, () => this.hasError$.next(true));
   }
 
   deleteById(id: number): void {
     this.api.deleteByIdUsingDELETE(id)
       .subscribe(() => {
-        this.snackbarService.open('Cidade deletada com sucesso!');
-        this.sharedService.fetchCitiesAndStates();
+        this.loadSuccess('Cidade deletada com sucesso!');
       });
+  }
+
+  createList(cities: CityDto[]) {
+    // TODO use save list method
+    this.api.saveUsingPOST(cities as CityDto)
+      .subscribe(() => {
+        this.loadSuccess('Cidades criadas com sucesso!');
+      }, () => this.hasError$.next(true));
+  }
+
+  loadSuccess(msg: string): void {
+    this.snackbarService.open(msg);
+    this.hasError$.next(false);
+    this.sharedService.fetchCitiesAndStates();
   }
 
 }

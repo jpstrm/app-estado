@@ -13,6 +13,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
+import { NewCityListComponent } from './new-list/new-city-list.component';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   imports: [
@@ -26,12 +29,15 @@ import { MatSelectModule } from '@angular/material/select';
     MatButtonModule,
     MatDialogModule,
     MatSelectModule,
-    StateApiModule
+    StateApiModule,
+    MatChipsModule,
+    MatIconModule
   ],
   declarations: [
     CityTableComponent,
     CityListComponent,
-    NewCityComponent
+    NewCityComponent,
+    NewCityListComponent
   ],
   exports: [
     CityListComponent

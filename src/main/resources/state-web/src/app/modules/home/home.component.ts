@@ -6,6 +6,7 @@ import { skip } from 'rxjs/operators';
 import { Observable, Subscription } from 'rxjs';
 import { StateDto } from '../../api/state';
 import { SharedService } from '../../shared/shared.service';
+import { NewCityListComponent } from '../city/new-list/new-city-list.component';
 
 @Component({
   selector: 'app-home',
@@ -25,7 +26,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.watchDialog();
+    this.watchNewCityDialog();
+    this.watchNewCitiesDialog();
     this.states$ = this.sharedService.states$;
   }
 
@@ -33,7 +35,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  watchDialog(): void {
+  watchNewCityDialog(): void {
     this.subscription = this.cityService.dialog$.pipe(skip(1))
       .subscribe(() => this.dialog.open(NewCityComponent, {
         width: '350px',
@@ -41,5 +43,15 @@ export class HomeComponent implements OnInit, OnDestroy {
         data: this.sharedService.states$
       }));
   }
+
+  watchNewCitiesDialog(): void {
+    this.subscription = this.cityService.dialogInLote$.pipe(skip(1))
+      .subscribe(() => this.dialog.open(NewCityListComponent, {
+        width: '350px',
+        disableClose: true,
+        data: this.sharedService.states$
+      }));
+  }
+
 
 }
