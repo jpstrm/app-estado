@@ -16,7 +16,7 @@
 
     <!-- Nav Item -->
     <li class="nav-item" [class.active]="true">
-      <a class="nav-link" [routerLink]="item.url" routerLinkActive="active">
+      <a class="nav-link" [routerLink]="item.url ? [item.url] : []" routerLinkActive="active" (click)="item.action$?.next()">
         <i class="fas {{item.icon}}"></i>
         <span>{{item.title}}</span></a>
     </li>

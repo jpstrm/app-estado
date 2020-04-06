@@ -1,0 +1,46 @@
+<div class="w-100">
+  <!-- Title -->
+  <h1 mat-dialog-title>Nova Cidade</h1>
+
+  <!--Form-->
+  <form mat-dialog-content [formGroup]="form">
+    <!-- Name -->
+    <div class="mb-3">
+      <mat-form-field class="w-100">
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="name">
+        <mat-error *ngIf="form.controls.name.invalid">Nome obrigatório</mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Population -->
+    <div class="mb-3">
+      <mat-form-field class="w-100">
+        <mat-label>População</mat-label>
+        <input matInput formControlName="population" type="number">
+        <mat-error *ngIf="form?.controls.population.invalid">População obrigatória</mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- State -->
+    <div class="mb-3">
+      <mat-form-field class="w-100">
+        <mat-label>Estado</mat-label>
+        <mat-select formControlName="stateId">
+          <mat-option *ngFor="let state of states$ | async" [value]="state.id" >
+            {{state.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </form>
+
+  <!-- Actions -->
+  <div mat-dialog-actions class="justify-content-end">
+    <!-- Cancel button -->
+    <button mat-raised-button class="mr-2" (click)="closeDialog()">Cancelar</button>
+
+    <!-- Save button -->
+    <button mat-raised-button color="primary" (click)="save()" cdkFocusInitial>Salvar</button>
+  </div>
+</div>

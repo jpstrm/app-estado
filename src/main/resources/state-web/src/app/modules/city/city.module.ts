@@ -6,17 +6,32 @@ import { CityService } from './city.service';
 import { MatTableModule } from '@angular/material/table';
 import { StateApiModule } from '../../api/state';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { NewCityComponent } from './new/new-city.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatTableModule,
     MatPaginatorModule,
-    StateApiModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatSelectModule,
+    StateApiModule
   ],
   declarations: [
     CityTableComponent,
-    CityListComponent
+    CityListComponent,
+    NewCityComponent
   ],
   exports: [
     CityListComponent

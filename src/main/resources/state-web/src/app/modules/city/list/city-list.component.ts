@@ -12,9 +12,7 @@ export class CityListComponent implements OnInit {
 
   cities$: Observable<CityDto[]>;
 
-  constructor(
-    private cityService: CityService
-  ) { }
+  constructor(private cityService: CityService) { }
 
   ngOnInit(): void {
     this.cityService.findAll();

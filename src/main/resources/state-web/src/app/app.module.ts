@@ -6,6 +6,11 @@ import { AppComponent } from './app.component';
 import { ContainerModule } from './modules/container/container.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeModule } from './modules/home/home.module';
+import { MatDialogModule } from '@angular/material/dialog';
+import { CustomHttpInterceptor } from './interceptor/custom-http-interceptor.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { SnackbarService } from './shared/snackbar.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   imports: [
@@ -13,12 +18,17 @@ import { HomeModule } from './modules/home/home.module';
     AppRoutingModule,
     ContainerModule,
     BrowserAnimationsModule,
-    HomeModule
+    MatDialogModule,
+    HomeModule,
+    MatSnackBarModule
   ],
   declarations: [
     AppComponent
   ],
-  providers: [],
+  providers: [
+    SnackbarService,
+    { provide: HTTP_INTERCEPTORS, useClass: CustomHttpInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 

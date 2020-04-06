@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { SidebarItem } from './modules/container/sidebar/sidebar-item';
+import { CityService } from './modules/city/city.service';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +10,14 @@ import { SidebarItem } from './modules/container/sidebar/sidebar-item';
 export class AppComponent {
 
   title = 'App Estado';
+  items: SidebarItem[];
 
-  items: SidebarItem[]  = [
-    { title: 'Cadastrar Cidade', url: '/#cities', icon: 'fa-city' }
-  ];
+  constructor(
+    private cityService: CityService
+  ) {
+    this.items = [
+      { title: 'Cadastrar Cidade', icon: 'fa-city', action$: cityService.dialog$ }
+    ];
+  }
 
 }

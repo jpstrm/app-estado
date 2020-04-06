@@ -12,9 +12,7 @@ export class StateListComponent implements OnInit {
 
   states$: Observable<StateDto[]>;
 
-  constructor(
-    private stateService: StateService
-  ) { }
+  constructor(private stateService: StateService) { }
 
   ngOnInit(): void {
     this.stateService.findAll();
