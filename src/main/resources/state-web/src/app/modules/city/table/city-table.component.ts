@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class CityTableComponent implements OnInit {
 
-  displayedColumns: string[] = ['name', 'state', 'population'];
+  displayedColumns: string[] = ['name', 'stateCode', 'population'];
 
   @Input() cities: Observable<CityDto[]>;
 
