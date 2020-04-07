@@ -23,6 +23,7 @@ public class CurrencyConvertClient {
 
   @Cacheable("dolarToBrl")
   public DolarCurrencyDto getDolarCurrency() {
+    logger.info("Calling dollarToBrl api");
     final Map<String, Double> result = WebClient.create(dollarCurrencyUrl)
         .get()
         .uri(uriBuilder -> uriBuilder
@@ -34,6 +35,7 @@ public class CurrencyConvertClient {
         .retrieve()
         .bodyToMono(Map.class)
         .block();
+
     return new DolarCurrencyDto(result);
   }
 
