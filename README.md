@@ -41,6 +41,10 @@ ou exportar as variáveis de ambiente para a máquina local
 mvn clean package spring-boot:run
 ```
 
+# Aplicação
+- local: `http://localhost:8080`
+- heroku: `https://app-estado.herokuapp.com`
+    
 # Documentação
 
 ## Scripts do Banco de dados
@@ -48,5 +52,5 @@ mvn clean package spring-boot:run
 - Carga inicial: src/main/resources/data.sql
 
 ## Swagger
-    - local: `http://localhost:8000/swagger-ui.html`
+    - local: `http://localhost:8080/swagger-ui.html`
     - heroku: `https://app-estado.herokuapp.com/swagger-ui.html`
