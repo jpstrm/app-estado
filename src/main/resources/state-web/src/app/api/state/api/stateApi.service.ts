@@ -11,19 +11,15 @@
  */
 /* tslint:disable:no-unused-variable member-ordering */
 
-import { Inject, Injectable, Optional }                      from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams,
-         HttpResponse, HttpEvent }                           from '@angular/common/http';
-import { CustomHttpUrlEncodingCodec }                        from '../encoder';
+import { Inject, Injectable, Optional } from '@angular/core';
+import { HttpClient, HttpEvent, HttpHeaders, HttpResponse } from '@angular/common/http';
 
-import { Observable }                                        from 'rxjs';
-
-import { ApiError } from '../model/apiError';
+import { Observable } from 'rxjs';
 import { StateListResponse } from '../model/stateListResponse';
 import { StateRequest } from '../model/stateRequest';
 
-import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
-import { Configuration }                                     from '../configuration';
+import { BASE_PATH } from '../variables';
+import { Configuration } from '../configuration';
 
 
 @Injectable()
@@ -98,14 +94,14 @@ export class StateApiService {
     /**
      * Create a State
      * Operation to create a state.
-     * @param request stateRequest
+     * @param stateRequest stateRequest
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public saveUsingPOST1(request?: StateRequest, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public saveUsingPOST1(request?: StateRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public saveUsingPOST1(request?: StateRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public saveUsingPOST1(request?: StateRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public saveUsingPOST1(stateRequest?: StateRequest, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public saveUsingPOST1(stateRequest?: StateRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public saveUsingPOST1(stateRequest?: StateRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public saveUsingPOST1(stateRequest?: StateRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
 
         let headers = this.defaultHeaders;
@@ -130,7 +126,7 @@ export class StateApiService {
         }
 
         return this.httpClient.post<any>(`${this.basePath}/states`,
-            request,
+            stateRequest,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -144,19 +140,22 @@ export class StateApiService {
      * List all States
      * Operation to list all states.
      * @param stateId stateId
-     * @param request stateRequest
+     * @param stateRequest stateRequest
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public updateUsingPUT1(stateId: number, request?: StateRequest, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public updateUsingPUT1(stateId: number, request?: StateRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public updateUsingPUT1(stateId: number, request?: StateRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public updateUsingPUT1(stateId: number, request?: StateRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public updateUsingPUT1(stateId: number, stateRequest: StateRequest, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public updateUsingPUT1(stateId: number, stateRequest: StateRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public updateUsingPUT1(stateId: number, stateRequest: StateRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public updateUsingPUT1(stateId: number, stateRequest: StateRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (stateId === null || stateId === undefined) {
             throw new Error('Required parameter stateId was null or undefined when calling updateUsingPUT1.');
         }
 
+        if (stateRequest === null || stateRequest === undefined) {
+            throw new Error('Required parameter stateRequest was null or undefined when calling updateUsingPUT1.');
+        }
 
         let headers = this.defaultHeaders;
 
@@ -180,7 +179,7 @@ export class StateApiService {
         }
 
         return this.httpClient.put<any>(`${this.basePath}/states/${encodeURIComponent(String(stateId))}`,
-            request,
+            stateRequest,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

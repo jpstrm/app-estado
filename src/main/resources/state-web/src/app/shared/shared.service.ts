@@ -27,7 +27,6 @@ export class SharedService {
   fetchCitiesAndStates(): void {
     forkJoin([this.cityApi.findAllUsingGET(), this.stateApi.findAllUsingGET1()])
       .subscribe(data => {
-        console.log('data', data);
         this.updateCities((data[0] as CityListResponse).cities);
         this.updateStates((data[1] as StateListResponse).states);
       });

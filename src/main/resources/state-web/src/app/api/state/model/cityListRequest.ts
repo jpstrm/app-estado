@@ -9,18 +9,15 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
+import { CityRequest } from './cityRequest';
 
 
 /**
- * State Request
+ * City list Request
  */
-export interface StateRequest { 
+export interface CityListRequest { 
     /**
-     * State code
+     * List of Cities
      */
-    code?: string;
-    /**
-     * State name
-     */
-    name?: string;
+    cities?: Array<CityRequest>;
 }

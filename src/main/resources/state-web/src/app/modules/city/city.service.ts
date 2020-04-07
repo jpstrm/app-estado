@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { CityApiService, CityDto, CityListResponse, StateApiService } from '../../api/state';
+import { CityApiService, CityDto, CityListRequest, CityListResponse, StateApiService } from '../../api/state';
 import { SharedService } from '../../shared/shared.service';
 import { SnackbarService } from '../../shared/snackbar.service';
+import { skip } from 'rxjs/operators';
 
 @Injectable()
 export class CityService {
@@ -39,17 +40,19 @@ export class CityService {
   }
 
   createList(cities: CityDto[]) {
-    // TODO use save list method
-    this.api.saveUsingPOST(cities as CityDto)
+    const request: CityListRequest = {};
+    request.cities = cities;
+    this.api.saveAllUsingPOST(request)
       .subscribe(() => {
         this.loadSuccess('Cidades criadas com sucesso!');
       }, () => this.hasError$.next(true));
   }
 
   loadSuccess(msg: string): void {
-    this.snackbarService.open(msg);
     this.hasError$.next(false);
     this.sharedService.fetchCitiesAndStates();
+    this.sharedService.cities$.pipe(skip(1))
+      .subscribe(() => this.snackbarService.open(msg));
   }
 
 }

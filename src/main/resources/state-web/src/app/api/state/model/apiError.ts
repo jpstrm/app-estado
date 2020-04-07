@@ -11,6 +11,9 @@
  */
 
 
+/**
+ * Api Error
+ */
 export interface ApiError { 
     /**
      * Error detail

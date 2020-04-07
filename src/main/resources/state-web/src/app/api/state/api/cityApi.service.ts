@@ -11,19 +11,16 @@
  */
 /* tslint:disable:no-unused-variable member-ordering */
 
-import { Inject, Injectable, Optional }                      from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams,
-         HttpResponse, HttpEvent }                           from '@angular/common/http';
-import { CustomHttpUrlEncodingCodec }                        from '../encoder';
+import { Inject, Injectable, Optional } from '@angular/core';
+import { HttpClient, HttpEvent, HttpHeaders, HttpResponse } from '@angular/common/http';
 
-import { Observable }                                        from 'rxjs';
-
-import { ApiError } from '../model/apiError';
+import { Observable } from 'rxjs';
+import { CityListRequest } from '../model/cityListRequest';
 import { CityListResponse } from '../model/cityListResponse';
 import { CityRequest } from '../model/cityRequest';
 
-import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
-import { Configuration }                                     from '../configuration';
+import { BASE_PATH } from '../variables';
+import { Configuration } from '../configuration';
 
 
 @Injectable()
@@ -180,17 +177,68 @@ export class CityApiService {
     }
 
     /**
+     * Create list of Cities
+     * Operation to create a list of cities.
+     * @param cityListRequest cityListRequest
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public saveAllUsingPOST(cityListRequest: CityListRequest, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public saveAllUsingPOST(cityListRequest: CityListRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public saveAllUsingPOST(cityListRequest: CityListRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public saveAllUsingPOST(cityListRequest: CityListRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        if (cityListRequest === null || cityListRequest === undefined) {
+            throw new Error('Required parameter cityListRequest was null or undefined when calling saveAllUsingPOST.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*',
+            'application/json'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected != undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        return this.httpClient.post<any>(`${this.basePath}/cities/multi`,
+            cityListRequest,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
      * Create a City
      * Operation to create a city.
      * @param request cityRequest
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public saveUsingPOST(request?: CityRequest, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public saveUsingPOST(request?: CityRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public saveUsingPOST(request?: CityRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public saveUsingPOST(request?: CityRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public saveUsingPOST(request: CityRequest, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public saveUsingPOST(request: CityRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public saveUsingPOST(request: CityRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public saveUsingPOST(request: CityRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
+        if (request === null || request === undefined) {
+            throw new Error('Required parameter request was null or undefined when calling saveUsingPOST.');
+        }
 
         let headers = this.defaultHeaders;
 
@@ -228,19 +276,22 @@ export class CityApiService {
      * List all Cities
      * Operation to list all cities.
      * @param cityId cityId
-     * @param request cityRequest
+     * @param cityRequest cityRequest
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public updateUsingPUT(cityId: number, request?: CityRequest, observe?: 'body', reportProgress?: boolean): Observable<any>;
-    public updateUsingPUT(cityId: number, request?: CityRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
-    public updateUsingPUT(cityId: number, request?: CityRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
-    public updateUsingPUT(cityId: number, request?: CityRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public updateUsingPUT(cityId: number, cityRequest: CityRequest, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public updateUsingPUT(cityId: number, cityRequest: CityRequest, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public updateUsingPUT(cityId: number, cityRequest: CityRequest, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public updateUsingPUT(cityId: number, cityRequest: CityRequest, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (cityId === null || cityId === undefined) {
             throw new Error('Required parameter cityId was null or undefined when calling updateUsingPUT.');
         }
 
+        if (cityRequest === null || cityRequest === undefined) {
+            throw new Error('Required parameter cityRequest was null or undefined when calling updateUsingPUT.');
+        }
 
         let headers = this.defaultHeaders;
 
@@ -264,7 +315,7 @@ export class CityApiService {
         }
 
         return this.httpClient.put<any>(`${this.basePath}/cities/${encodeURIComponent(String(cityId))}`,
-            request,
+            cityRequest,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

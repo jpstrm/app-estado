@@ -11,6 +11,9 @@
  */
 
 
+/**
+ * City Request
+ */
 export interface CityRequest { 
     /**
      * City name

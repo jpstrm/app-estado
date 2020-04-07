@@ -14,15 +14,15 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SharedService } from './shared/shared.service';
 
 @NgModule({
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    ContainerModule,
-    BrowserAnimationsModule,
-    MatDialogModule,
-    HomeModule,
-    MatSnackBarModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        ContainerModule,
+        BrowserAnimationsModule,
+        MatDialogModule,
+        HomeModule,
+        MatSnackBarModule
+    ],
   declarations: [
     AppComponent
   ],
