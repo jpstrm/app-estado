@@ -1,5 +1,5 @@
 <div class="container flex-row">
-  <div class="flex-column align-content-center">
+  <div class="flag-selection flex-column align-content-center">
     <!-- Title -->
     <div>
       <h3>Lista de Estados</h3>
@@ -8,7 +8,7 @@
     <!-- State select -->
     <div>
       <mat-select [(ngModel)]="selectedState">
-        <mat-option *ngFor="let state of states$ | async" [value]="state">
+        <mat-option *ngFor="let state of states" [value]="state">
           {{state.name}}
         </mat-option>
       </mat-select>

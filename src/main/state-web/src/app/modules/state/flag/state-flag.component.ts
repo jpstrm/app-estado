@@ -10,16 +10,18 @@ import { skip, take } from 'rxjs/operators';
 })
 export class StateFlagComponent implements OnInit, OnDestroy {
 
-  @Input('state') states$: Observable<StateDto[]>;
+  @Input('states') states$: Observable<StateDto[]>;
+  states: StateDto[] = [];
   selectedState: StateDto = {};
 
-  private subscription: Subscription;
+  private subscription = new Subscription();
 
   constructor() { }
 
   ngOnInit(): void {
     this.subscription = this.states$.pipe(skip(1), take(1))
       .subscribe(states => {
+        this.states = states;
         const state = states.filter(s => s.code === 'SC') as StateDto[];
         if (state.length) {
           this.selectedState = state[0];

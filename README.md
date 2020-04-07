@@ -33,6 +33,7 @@ ou exportar as variáveis de ambiente para a máquina local
 
 - Frontend: Navegar até a pasta src/main/state-web
 ```sh
+  npm install -g @angular/cli
   npm install && npm run build
 ```
 

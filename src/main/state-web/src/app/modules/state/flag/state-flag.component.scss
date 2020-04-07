@@ -1,11 +1,16 @@
+$defaultSize: 100px;
+
 .container {
   display: flex;
-  min-height: 125px;
+  min-height: $defaultSize;
 
+  .flag-selection {
+    min-width: 150px;
+  }
   .state-url {
     margin-left: 50px;
     img {
-      width: 150px;
+      width: $defaultSize;
     }
   }
 }
