@@ -31,7 +31,7 @@ ou exportar as variáveis de ambiente para a máquina local
 
 ### Ambiente Local
 
-- Frontend
+- Frontend: Navegar até a pasta src/main/state-web
 ```sh
   npm install && npm run build
 ```
