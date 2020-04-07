@@ -4,6 +4,7 @@ import br.com.state.dto.DolarCurrencyDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -16,9 +17,11 @@ import java.util.Map;
 public class CurrencyConvertClient {
 
   private Logger logger = LoggerFactory.getLogger(CurrencyConvertClient.class);
+
   @Value("${api.dollar-currency}")
   private String dollarCurrencyUrl;
 
+  @Cacheable("dolarToBrl")
   public DolarCurrencyDto getDolarCurrency() {
     final Map<String, Double> result = WebClient.create(dollarCurrencyUrl)
         .get()
