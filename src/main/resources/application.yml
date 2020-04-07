@@ -26,12 +26,9 @@ spring:
   datasource:
     continue-on-error: true
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/ticket?createDatabaseIfNotExist=true&reconnect=true
-    username: root
-    password: db1234567
-#    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:state}?createDatabaseIfNotExist=true&reconnect=true
-#    username: ${DB_USER}
-#    password: ${DB_PASSWORD}
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:state}?createDatabaseIfNotExist=true&reconnect=true
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
     tomcat:
       test-on-borrow: true
       test-on-connect: true
