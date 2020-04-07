@@ -10,8 +10,10 @@ Gerencimaneto Estados e Municípios
         
 # Tecnologias usadas
 
-* SpringBoot / JPA / Swagger / Webflux
-* Junit 5 / Mockito
+* SpringBoot 2, Spring data, Webflux, Swagger
+* Angular, Typescript
+* Maven
+* Junit 5, Mockito
 * MySQL
 
 # Requisitos
@@ -19,6 +21,7 @@ Gerencimaneto Estados e Municípios
 - Certifique-se de primeiro ter instalado e configurado as tecnologias:
     - JDK 8
     - Maven
+    - npm
 
 # Execução
 
@@ -26,22 +29,24 @@ Gerencimaneto Estados e Municípios
 - Trocar as variáveis do ambiente em src/main/resources/application.yml por configurações válidas
 ou exportar as variáveis de ambiente para a máquina local
 
-### Maven
+### Ambiente Local
 
-- Executando no ambiente local 
+- Frontend
+```sh
+  npm install && npm run build
+```
 
+- Backend
 ```sh
 mvn clean package spring-boot:run
 ```
 
-- Buildar
-
-```sh
-mvn clean package
-```
-
 # Documentação
 
-- Swagger
+## Scripts do Banco de dados
+- Criação do banco: src/main/resources/schema.sql
+- Carga inicial: src/main/resources/data.sql
+
+## Swagger
     - local: `http://localhost:8000/swagger-ui.html`
-    - heroku: `https://app-estado.herokuapp.com`
+    - heroku: `https://app-estado.herokuapp.com/swagger-ui.html`
